@@ -1,12 +1,12 @@
 import java.util.*; 
  
-class Student { 
+class User { 
     private String studentName; 
     private int rollNumber; 
     private int totalClassesHeld; 
     private int totalClassesAttended; 
  
-    public Student(String studentName, int rollNumber, int totalClassesHeld, int 
+    public User(String studentName, int rollNumber, int totalClassesHeld, int 
 totalClassesAttended) { 
         this.studentName = studentName; 
         this.rollNumber = rollNumber; 
@@ -43,7 +43,7 @@ totalClassesAttended) {
 } 
  
 class StudentAttendanceSystem { 
-    private Map<Integer, Student> attendanceRecords; // Map<RollNumber, Student> 
+    private Map<Integer, User> attendanceRecords; // Map<RollNumber, Student> 
  
     public StudentAttendanceSystem() { 
         attendanceRecords = new HashMap<>(); 
@@ -56,7 +56,7 @@ public void addOrUpdateStudentRecord(String studentName, int rollNumber, int tot
     }
 
     if (attendanceRecords.containsKey(rollNumber)) { 
-        Student existingStudent = attendanceRecords.get(rollNumber); 
+        User existingStudent = attendanceRecords.get(rollNumber); 
         if (!existingStudent.getStudentName().equals(studentName)) { 
             System.out.println("Error: A record with the same roll number but different name already exists."); 
             return; 
@@ -64,7 +64,7 @@ public void addOrUpdateStudentRecord(String studentName, int rollNumber, int tot
         existingStudent.updateAttendance(totalClassesHeld, totalClassesAttended); 
         System.out.println("Record updated successfully!");
     } else { 
-        Student newStudent = new Student(studentName, rollNumber, totalClassesHeld, totalClassesAttended); 
+        User newStudent = new User(studentName, rollNumber, totalClassesHeld, totalClassesAttended); 
         attendanceRecords.put(rollNumber, newStudent);
         System.out.println("Record added successfully!");
     } 
@@ -77,8 +77,8 @@ public void addOrUpdateStudentRecord(String studentName, int rollNumber, int tot
         } 
  
         System.out.println("All Student Records:"); 
-        for (Map.Entry<Integer, Student> entry : attendanceRecords.entrySet()) { 
-            Student student = entry.getValue(); 
+        for (Map.Entry<Integer, User> entry : attendanceRecords.entrySet()) { 
+            User student = entry.getValue(); 
             System.out.println("Roll Number: " + student.getRollNumber()); 
             System.out.println("\nStudent Name: " + student.getStudentName()); 
             System.out.println("\nAttendance Percentage: " + 
@@ -97,7 +97,7 @@ student.getTotalClassesHeld());
             return; 
         } 
  
-        Student student = attendanceRecords.get(rollNumber); 
+        User student = attendanceRecords.get(rollNumber); 
         System.out.println("Attendance for Student " + student.getStudentName() + 
 ":"); 
         System.out.println("Attendance Percentage: " + 
@@ -123,7 +123,7 @@ student.getTotalClassesAttended());
  
             if (input.equals("1")) { 
                 System.out.print("Enter student name: "); 
-                String studentName = scanner.nextLine().toLowerCase(); // Convert input to lowercase 
+                String studentName = scanner.nextLine().toLowerCase(); 
  
                 int rollNumber = 0; 
                 int totalClassesHeld = 0; 
@@ -137,7 +137,7 @@ student.getTotalClassesAttended());
                         totalClassesHeld = scanner.nextInt(); 
                         System.out.print("Enter total classes attended: "); 
                         totalClassesAttended = scanner.nextInt(); 
-                        scanner.nextLine(); // Consume the newline character 
+                        scanner.nextLine(); 
                         if (totalClassesAttended > totalClassesHeld) { 
                             System.out.println("Error: Attended classes cannot be greater than total classes held. Please enter again."); 
                             continue; 
@@ -145,7 +145,7 @@ student.getTotalClassesAttended());
                         break; 
                     } catch (InputMismatchException e) { 
                         System.out.println("Invalid input. Please enter integers for roll number and total classes."); 
-                        scanner.nextLine(); // Clear the input buffer 
+                        scanner.nextLine(); 
                     } 
                 } 
  
@@ -158,10 +158,10 @@ totalClassesHeld, totalClassesAttended);
                 int rollNumber = 0; 
                 try { 
                     rollNumber = scanner.nextInt(); 
-                    scanner.nextLine(); // Consume the newline character 
+                    scanner.nextLine(); 
                 } catch (InputMismatchException e) { 
                     System.out.println("Invalid input. Please enter an integer for roll number."); 
-                    scanner.nextLine(); // Clear the input buffer 
+                    scanner.nextLine();  
                     continue; 
                 } 
                 attendanceSystem.displayAttendance(rollNumber); 
